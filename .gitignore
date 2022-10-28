@@ -1,5 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+/.idea/
+
 # dependencies
 /node_modules
 /.pnp
@@ -22,3 +24,43 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# backend stuff
+
+.DS_Store
+.idea/
+
+portalBackend/HELP.md
+portalBackend/target/
+portalBackend/!.mvn/wrapper/maven-wrapper.jar
+portalBackend/!*/src/main/*/target/
+portalBackend/!*/src/test/*/target/
+
+### STS ###
+portalBackend/.apt_generated
+portalBackend/.classpath
+portalBackend/.factorypath
+portalBackend/.project
+portalBackend/.settings
+portalBackend/.springBeans
+portalBackend/.sts4-cache
+
+### IntelliJ IDEA ###
+portalBackend/.idea
+portalBackend/*.iws
+portalBackend/*.iml
+portalBackend/*.ipr
+
+### NetBeans ###
+portalBackend/nbproject/private/
+portalBackend/nbbuild/
+portalBackend/dist/
+portalBackend/nbdist/
+portalBackend/.nb-gradle/
+portalBackend/build/
+portalBackend/!*/src/main/*/build/
+portalBackend/!*/src/test/*/build/
+
+### VS Code ###
+portalBackend/.vscode/
+/portalBackend/target/
