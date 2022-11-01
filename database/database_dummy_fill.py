@@ -42,7 +42,7 @@ def gen_occupancy(capacity, full=False):
     """ Generate a random occupancy for a flight
     full: whether the flight is full or not"""
 
-    return randrange(0, capacity) if not full else 0
+    return randrange(0, capacity) if not full else capacity
 
 
 def gen_price(min_price=100, max_price=300, upscale=1):
@@ -89,7 +89,8 @@ def create_tables(d1, num_flights=50):
         airline = random.sample(AIRLINES, 1)[0]
 
         # Randomly construct a sample flight df
-        flight_df.loc[i] = [i, f"{airline}_{randrange(1, 20)}", airline,
+        # Quick fix to make sure that the flight number is unique
+        flight_df.loc[i] = [i, f"{airline}_{i}", airline,
                             base_capacity, gen_occupancy(base_capacity, full), gen_price(),
                             int(base_capacity / 2), gen_occupancy(int(base_capacity / 2), full), gen_price(upscale=2),
                             int(base_capacity / 4), gen_occupancy(int(base_capacity / 4), full), gen_price(upscale=10)]
