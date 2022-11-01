@@ -60,9 +60,9 @@ def create_airport_tables():
     location_df = pd.DataFrame(columns=['ID', 'City', 'Zip', 'State', 'Country'])
 
     for i, (airport, location) in enumerate(AIRPORTS.items()):
-        airport_df.loc[i] = [i, airport]
-        airport_location_df.loc[i] = [i, i, i]
-        location_df.loc[i] = [i, location['City'], location['Zip'], location['State'], location['Country']]
+        airport_df.loc[i] = [i+1, airport]
+        airport_location_df.loc[i] = [i+1, i+1, i+1]
+        location_df.loc[i] = [i+1, location['City'], location['Zip'], location['State'], location['Country']]
 
     return airport_df, airport_location_df, location_df
 
@@ -90,7 +90,7 @@ def create_tables(d1, num_flights=50):
 
         # Randomly construct a sample flight df
         # Quick fix to make sure that the flight number is unique
-        flight_df.loc[i] = [i, f"{airline}_{i}", airline,
+        flight_df.loc[i] = [i+1, f"{airline}_{i+1}", airline,
                             base_capacity, gen_occupancy(base_capacity, full), gen_price(),
                             int(base_capacity / 2), gen_occupancy(int(base_capacity / 2), full), gen_price(upscale=2),
                             int(base_capacity / 4), gen_occupancy(int(base_capacity / 4), full), gen_price(upscale=10)]
@@ -100,8 +100,8 @@ def create_tables(d1, num_flights=50):
         lands_time = random_date(departure_time, departure_time + timedelta(hours=12))
 
         # Create departure and landing tables
-        departure_df.loc[i] = [i, randrange(0, 13), i, departure_time]
-        lands_df.loc[i] = [i, randrange(0, 13), i, lands_time]
+        departure_df.loc[i] = [i+1, randrange(0, 13), i+1, departure_time]
+        lands_df.loc[i] = [i+1, randrange(0, 13), i+1, lands_time]
 
     tables = (airport_df, airport_location_df, location_df, flight_df, departure_df, lands_df)
     return tables
