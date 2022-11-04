@@ -191,7 +191,7 @@ CREATE TABLE `user` (
   `contact_number` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `login` int(11) NOT NULL
+  `login` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
