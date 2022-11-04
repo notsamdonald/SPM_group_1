@@ -1,8 +1,6 @@
 package com.example.portalbackend.user;
 
 import com.example.portalbackend.controllers.exceptions.UserNotFoundException;
-import com.example.portalbackend.flight.Flight;
-import com.example.portalbackend.flight.FlightDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +52,28 @@ public class UserManager {
             throw new RuntimeException("Error in fetching user with login: " + login);
         }
 
+    }
+
+    public void updateUser(User newUser, String login) {
+        if (login == null || login.isEmpty()) {
+            throw new RuntimeException("\'login\' field should not be null or empty.");
+        }
+        try {
+            userDAO.updateUser(newUser, login);
+        }catch (SQLException e) {
+            log.error("SQL exception. Ex message :" + e.getMessage());
+            throw new RuntimeException("Internal Server Error. Try again later");
+        }
+    }
+
+    public void deleteUser(String login) {
+        if (login == null || login.isEmpty()) {
+            throw new RuntimeException("\'login\' field can not be empty or null.");
+        }
+        try {
+            userDAO.deleteUser(login);
+        } catch (SQLException ex) {
+            throw new RuntimeException("Error while deleting the user with login " + login + ".");
+        }
     }
 }
