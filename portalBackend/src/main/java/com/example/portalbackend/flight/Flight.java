@@ -1,7 +1,7 @@
 package com.example.portalbackend.flight;
 
 public class Flight {
-    private final int id;
+    private int id;
     private final String number;
     private final String company;
     private final int aCapacity;
@@ -14,8 +14,7 @@ public class Flight {
     private final int cOccupancy;
     private final int cFare;
 
-    public Flight(int id, String number, String company, int aCapacity, int aOccupancy, int aFare, int bCapacity, int bOccupancy, int bFare, int cCapacity, int cOccupancy, int cFare) {
-        this.id = id;
+    public Flight(String number, String company, int aCapacity, int aOccupancy, int aFare, int bCapacity, int bOccupancy, int bFare, int cCapacity, int cOccupancy, int cFare) {
         this.number = number;
         this.company = company;
         this.aCapacity = aCapacity;
@@ -31,6 +30,9 @@ public class Flight {
 
     public int getId() {
         return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNumber() {

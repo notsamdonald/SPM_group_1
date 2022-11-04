@@ -20,9 +20,9 @@ public class FlightDAO {
     @Autowired
     public JDBCConnectionManager connectionManager;
 
-    private final String SQL_ADD_NEW_FLIGHT = "INSERT INTO FLIGHT (id, number, company, A_capacity, A_occupancy, A_fare, B_capacity, B_occupancy, B_fare, C_capacity, C_occupancy, C_fare)" +
-            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private final String SQL_UPDATE_FLIGHT = "UPDATE FLIGHT SET id=?, number=?, company=?, A_capacity=?, A_occupancy=?, A_fare=?, B_capacity=?, B_occupancy=?, B_fare=?, C_capacity=?, C_occupancy=?, C_fare=?" +
+    private final String SQL_ADD_NEW_FLIGHT = "INSERT INTO FLIGHT (number, company, A_capacity, A_occupancy, A_fare, B_capacity, B_occupancy, B_fare, C_capacity, C_occupancy, C_fare)" +
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String SQL_UPDATE_FLIGHT = "UPDATE FLIGHT SET company=?, A_capacity=?, A_occupancy=?, A_fare=?, B_capacity=?, B_occupancy=?, B_fare=?, C_capacity=?, C_occupancy=?, C_fare=?" +
             " WHERE number=?";
 
     private final String SQL_DELETE_FLIGHT = "DELETE FROM FLIGHT WHERE number=?";
@@ -30,49 +30,45 @@ public class FlightDAO {
     private final String SQL_FLIGHT_ID_BY_NUMBER = "SELECT id FROM FLIGHT WHERE NUMBER = ?";
     private final String SQL_FLIGHT_BY_NUMBER = "SELECT * FROM FLIGHT WHERE NUMBER = ?";
 
-    public int addFlight(Flight newFlight) {
-        int id = -1;
+    public void addFlight(Flight newFlight) throws SQLException {
+        Connection conn = null;
         try {
-            Connection conn = connectionManager.getConnection();
+            conn = connectionManager.getConnection();
 
             try {
                 PreparedStatement preparedStatement = conn.prepareStatement(SQL_ADD_NEW_FLIGHT);
-                preparedStatement.setInt(1, newFlight.getId());
-                preparedStatement.setString(2, newFlight.getNumber());
-                preparedStatement.setString(3, newFlight.getCompany());
-                preparedStatement.setInt(4, newFlight.getaCapacity());
-                preparedStatement.setInt(5, newFlight.getaOccupancy());
-                preparedStatement.setInt(6, newFlight.getaFare());
-                preparedStatement.setInt(7, newFlight.getbCapacity());
-                preparedStatement.setInt(8, newFlight.getbOccupancy());
-                preparedStatement.setInt(9, newFlight.getbFare());
-                preparedStatement.setInt(10, newFlight.getcCapacity());
-                preparedStatement.setInt(11, newFlight.getcOccupancy());
-                preparedStatement.setInt(12, newFlight.getcFare());
+                preparedStatement.setString(1, newFlight.getNumber());
+                preparedStatement.setString(2, newFlight.getCompany());
+                preparedStatement.setInt(3, newFlight.getaCapacity());
+                preparedStatement.setInt(4, newFlight.getaOccupancy());
+                preparedStatement.setInt(5, newFlight.getaFare());
+                preparedStatement.setInt(6, newFlight.getbCapacity());
+                preparedStatement.setInt(7, newFlight.getbOccupancy());
+                preparedStatement.setInt(8, newFlight.getbFare());
+                preparedStatement.setInt(9, newFlight.getcCapacity());
+                preparedStatement.setInt(10, newFlight.getcOccupancy());
+                preparedStatement.setInt(11, newFlight.getcFare());
                 preparedStatement.execute();
             } catch (SQLException ex) {
                 log.error("Error in adding new flight. Duplicate flight found" + ex.getMessage());
                 throw new RuntimeException("Add Flight \'" + newFlight.getNumber() + "\' is not available." +
                         " Try a different flight.");
             }
-
-            PreparedStatement ps = conn.prepareStatement(SQL_FLIGHT_ID_BY_NUMBER);
-            ps.setString(1, newFlight.getNumber());
-            ResultSet resultSet = ps.executeQuery();
-            while (resultSet.next()) {
-                id = resultSet.getInt(1);
-            }
         } catch (SQLException e) {
             log.error("Error in adding the new flight information : " + e.getMessage());
             throw new RuntimeException("Error in adding new flight. Try again later.");
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
         }
-        return id;
     }
 
-    public Flight getFlight(String flightNumber) {
+    public Flight getFlight(String flightNumber) throws SQLException {
         Flight flight = null;
+        Connection conn = null;
         try {
-            Connection conn = connectionManager.getConnection();
+            conn = connectionManager.getConnection();
             PreparedStatement ps = conn.prepareStatement(SQL_FLIGHT_BY_NUMBER);
             ps.setString(1, flightNumber);
             ResultSet resultSet = ps.executeQuery();
@@ -90,36 +86,38 @@ public class FlightDAO {
                 int cOccupancy = resultSet.getInt(11);
                 int cFare = resultSet.getInt(12);
 
-                flight = new Flight(id,number,company,aCapacity,aOccupancy,aFare,bCapacity,bOccupancy,bFare,cCapacity,cOccupancy,cFare);
+                flight = new Flight(number,company,aCapacity,aOccupancy,aFare,bCapacity,bOccupancy,bFare,cCapacity,cOccupancy,cFare);
+                flight.setId(id);
             }
         } catch (SQLException e) {
             log.error("Error in getting the flight information : " + e.getMessage());
             throw new RuntimeException("Error in getting the flight. Try again later.");
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
         }
         return flight;
     }
 
-    public ResponseMessageField updateFlight(String flightNumber, Flight newFlight) {
-        String message = Constants.updateFlightSuccessMessage;
-
+    public void updateFlight(String flightNumber, Flight newFlight) throws SQLException {
+        Connection conn = null;
         try {
-            Connection conn = connectionManager.getConnection();
+            conn = connectionManager.getConnection();
 
             try {
                 PreparedStatement preparedStatement = conn.prepareStatement(SQL_UPDATE_FLIGHT);
-                preparedStatement.setInt(1, newFlight.getId());
-                preparedStatement.setString(2, newFlight.getNumber());
-                preparedStatement.setString(3, newFlight.getCompany());
-                preparedStatement.setInt(4, newFlight.getaCapacity());
-                preparedStatement.setInt(5, newFlight.getaOccupancy());
-                preparedStatement.setInt(6, newFlight.getaFare());
-                preparedStatement.setInt(7, newFlight.getbCapacity());
-                preparedStatement.setInt(8, newFlight.getbOccupancy());
-                preparedStatement.setInt(9, newFlight.getbFare());
-                preparedStatement.setInt(10, newFlight.getcCapacity());
-                preparedStatement.setInt(11, newFlight.getcOccupancy());
-                preparedStatement.setInt(12, newFlight.getcFare());
-                preparedStatement.setString(13, flightNumber);
+                preparedStatement.setString(1, newFlight.getCompany());
+                preparedStatement.setInt(2, newFlight.getaCapacity());
+                preparedStatement.setInt(3, newFlight.getaOccupancy());
+                preparedStatement.setInt(4, newFlight.getaFare());
+                preparedStatement.setInt(5, newFlight.getbCapacity());
+                preparedStatement.setInt(6, newFlight.getbOccupancy());
+                preparedStatement.setInt(7, newFlight.getbFare());
+                preparedStatement.setInt(8, newFlight.getcCapacity());
+                preparedStatement.setInt(9, newFlight.getcOccupancy());
+                preparedStatement.setInt(10, newFlight.getcFare());
+                preparedStatement.setString(11, flightNumber);
                 preparedStatement.execute();
             } catch (SQLException ex) {
                 log.error("Error in updating flight" + ex.getMessage());
@@ -128,15 +126,17 @@ public class FlightDAO {
         } catch (SQLException e) {
             log.error("Error in updating the flight information : " + e.getMessage());
             throw new RuntimeException("Error in updating flight. Try again later.");
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
         }
-        ResponseMessageField resp = new ResponseMessageField(message);
-        return resp;
     }
 
-    public ResponseMessageField deleteFlight(String flightNumber) {
-        String message = Constants.deleteFlightSuccessMessage;
+    public void deleteFlight(String flightNumber) throws SQLException {
+        Connection conn = null;
         try {
-            Connection conn = connectionManager.getConnection();
+            conn = connectionManager.getConnection();
 
             try {
                 PreparedStatement preparedStatement = conn.prepareStatement(SQL_DELETE_FLIGHT);
@@ -149,8 +149,10 @@ public class FlightDAO {
         } catch (SQLException e) {
             log.error("Error in deleting the flight information : " + e.getMessage());
             throw new RuntimeException("Error in updating flight. Try again later.");
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
         }
-        ResponseMessageField resp = new ResponseMessageField(message);
-        return resp;
     }
 }

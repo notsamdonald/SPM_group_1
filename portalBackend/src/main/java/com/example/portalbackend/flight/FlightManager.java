@@ -1,19 +1,24 @@
 package com.example.portalbackend.flight;
 
+import com.example.portalbackend.controllers.exceptions.FlightNotFoundException;
 import com.example.portalbackend.controllers.response.ResponseMessageField;
+import com.example.portalbackend.user.UserManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
+
 @Component
 public class FlightManager {
+    Logger log = LoggerFactory.getLogger(FlightManager.class);
 
     @Autowired
     private FlightDAO flightDAO;
 
-    public int addFlight(Flight newFlight) {
-        if (newFlight.getId() <= 0) {
-            throw new RuntimeException("\'id\' field should be greater than zero and unique");
-        } else if (newFlight.getNumber().isEmpty() || newFlight.getNumber() == null) {
+    public void addFlight(Flight newFlight) throws SQLException {
+        if (newFlight.getNumber().isEmpty() || newFlight.getNumber() == null) {
             throw new RuntimeException("\'number\' field should not be null or empty.");
         } else if (newFlight.getCompany().isEmpty()) {
             throw new RuntimeException("\'company\' field should not be null or empty");
@@ -36,23 +41,33 @@ public class FlightManager {
         } else if (newFlight.getcFare() <= 0) {
             throw new RuntimeException("\'CFare\' field should greater than zero");
         }
-        return flightDAO.addFlight(newFlight);
+        try {
+            flightDAO.addFlight(newFlight);
+        } catch (SQLException e) {
+            log.error("SQL exception. Ex message :" + e.getMessage());
+            throw new RuntimeException("Internal Server Error. Try again later");
+        }
+
     }
 
-    public Flight getFlight(String flightNumber) {
+    public Flight getFlight(String flightNumber) throws FlightNotFoundException {
         if (flightNumber.isEmpty() || flightNumber == null) {
             throw new RuntimeException("\'number\' field should not be null or empty.");
         }
-        return flightDAO.getFlight(flightNumber);
+        try {
+            Flight flight =  flightDAO.getFlight(flightNumber);
+            if (flight == null) {
+                throw new FlightNotFoundException("Flight with number: " + flightNumber + " not found.");
+            }
+            return flight;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in fetching flight with number: " + flightNumber);
+        }
     }
 
-    public ResponseMessageField updateFlight(String flightNumber, Flight updatedFlight) {
+    public void updateFlight(String flightNumber, Flight updatedFlight) throws SQLException {
         if (flightNumber.isEmpty() || flightNumber == null) {
             throw new RuntimeException("\'flight number\' field should not be null or empty.");
-        } else if (updatedFlight.getId() <= 0) {
-            throw new RuntimeException("\'id\' field should be greater than zero and unique");
-        } else if (updatedFlight.getNumber().isEmpty() || updatedFlight.getNumber() == null) {
-            throw new RuntimeException("\'number\' field should not be null or empty.");
         } else if (updatedFlight.getCompany().isEmpty()) {
             throw new RuntimeException("\'company\' field should not be null or empty");
         } else if (updatedFlight.getaCapacity() <= 0) {
@@ -74,13 +89,23 @@ public class FlightManager {
         } else if (updatedFlight.getcFare() <= 0) {
             throw new RuntimeException("\'CFare\' field should greater than zero");
         }
-        return flightDAO.updateFlight(flightNumber, updatedFlight);
+        try {
+            flightDAO.updateFlight(flightNumber, updatedFlight);
+        } catch (SQLException e) {
+            log.error("SQL exception. Ex message :" + e.getMessage());
+            throw new RuntimeException("Internal Server Error. Try again later");
+        }
+
     }
 
-    public ResponseMessageField deleteFlight(String flightNumber) {
+    public void deleteFlight(String flightNumber) throws SQLException {
         if (flightNumber.isEmpty() || flightNumber == null) {
             throw new RuntimeException("\'flight number\' field should not be null or empty.");
         }
-        return flightDAO.deleteFlight(flightNumber);
+        try {
+            flightDAO.deleteFlight(flightNumber);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error while deleting the flight with number " + flightNumber + ".");
+        }
     }
 }

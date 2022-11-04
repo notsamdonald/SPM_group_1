@@ -22,6 +22,10 @@ SET time_zone = "+00:00";
 -- Database: `Flight`
 --
 
+DROP DATABASE IF EXISTS Flight;
+CREATE DATABASE IF NOT EXISTS Flight;
+USE Flight;
+
 -- --------------------------------------------------------
 
 --
