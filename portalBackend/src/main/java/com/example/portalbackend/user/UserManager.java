@@ -1,20 +1,24 @@
 package com.example.portalbackend.user;
 
+import com.example.portalbackend.controllers.exceptions.UserNotFoundException;
 import com.example.portalbackend.flight.Flight;
 import com.example.portalbackend.flight.FlightDAO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
+
 @Component
 public class UserManager {
+    Logger log = LoggerFactory.getLogger(UserManager.class);
 
     @Autowired
     private UserDAO userDAO;
 
-    public void addUser(User newUser) {
-        if (newUser.getId() <= 0) {
-            throw new RuntimeException("\'id\' field should be greater than zero and unique");
-        } else if (newUser.getFirstName().isEmpty() || newUser.getFirstName() == null) {
+    public void addUser(User newUser) throws SQLException {
+        if (newUser.getFirstName().isEmpty() || newUser.getFirstName() == null) {
             throw new RuntimeException("\'First Name\' field should not be null or empty.");
         } else if (newUser.getLastName().isEmpty()) {
             throw new RuntimeException("\'Last Name\' field should not be null or empty");
@@ -27,13 +31,28 @@ public class UserManager {
         } else if (newUser.getLogin().isEmpty() || newUser.getLogin() == null) {
             throw new RuntimeException("\'Login\' field should not be null or empty.");
         }
-        userDAO.addUser(newUser);
+        try {
+            userDAO.addUser(newUser);
+        } catch (SQLException e) {
+            log.error("SQL exception. Ex message :" + e.getMessage());
+            throw new RuntimeException("Internal Server Error. Try again later");
+        }
+
     }
 
-    public User getUser(String login) {
+    public User getUser(String login) throws UserNotFoundException {
         if (login.isEmpty() || login == null) {
             throw new RuntimeException("\'login\' field should not be null or empty.");
         }
-        return userDAO.getUser(login);
+        try {
+            User user = userDAO.getUser(login);
+            if (user == null) {
+                throw new UserNotFoundException("User with login :" + login + " is not found.");
+            }
+            return user;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in fetching user with login: " + login);
+        }
+
     }
 }

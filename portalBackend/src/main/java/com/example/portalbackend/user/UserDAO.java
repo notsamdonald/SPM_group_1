@@ -21,24 +21,23 @@ public class UserDAO {
     @Autowired
     public JDBCConnectionManager connectionManager;
 
-    private final String SQL_ADD_NEW_USER = "INSERT INTO USER (id, first_name, last_name, contact_number, email, password, login)" +
-            " VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private final String SQL_ADD_NEW_USER = "INSERT INTO USER (first_name, last_name, contact_number, email, password, login)" +
+            " VALUES (?, ?, ?, ?, ?, ?)";
 
-    private final String SQL_GET_USER = "SELECT * FROM USER WHERE login=?";
+    private final String SQL_GET_USER = "SELECT id,first_name, last_name, contact_number, email, password, login FROM USER WHERE login=?";
 
-    public void addUser(User newUser) {
+    public void addUser(User newUser) throws SQLException {
+        Connection conn = null;
         try {
-            Connection conn = connectionManager.getConnection();
-
+            conn = connectionManager.getConnection();
             try {
                 PreparedStatement preparedStatement = conn.prepareStatement(SQL_ADD_NEW_USER);
-                preparedStatement.setInt(1, newUser.getId());
-                preparedStatement.setString(2, newUser.getFirstName());
-                preparedStatement.setString(3, newUser.getLastName());
-                preparedStatement.setString(4, newUser.getContactNumber());
-                preparedStatement.setString(5, newUser.getEmail());
-                preparedStatement.setString(6, newUser.getPassword());
-                preparedStatement.setString(7, newUser.getLogin());
+                preparedStatement.setString(1, newUser.getFirstName());
+                preparedStatement.setString(2, newUser.getLastName());
+                preparedStatement.setString(3, newUser.getContactNumber());
+                preparedStatement.setString(4, newUser.getEmail());
+                preparedStatement.setString(5, newUser.getPassword());
+                preparedStatement.setString(6, newUser.getLogin());
                 preparedStatement.execute();
             } catch (SQLException ex) {
                 log.error("Error in adding new user. Duplicate login found" + ex.getMessage());
@@ -48,13 +47,18 @@ public class UserDAO {
         } catch (SQLException e) {
             log.error("Error in adding new user: " + e.getMessage());
             throw new RuntimeException("Error in adding new user. Try again later.");
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
         }
     }
 
-    public User getUser(String login) {
+    public User getUser(String login) throws SQLException {
         User user = null;
+        Connection conn = null;
         try {
-            Connection conn = connectionManager.getConnection();
+            conn = connectionManager.getConnection();
             PreparedStatement ps = conn.prepareStatement(SQL_GET_USER);
             ps.setString(1, login);
             ResultSet resultSet = ps.executeQuery();
@@ -71,6 +75,10 @@ public class UserDAO {
         } catch (SQLException e) {
             log.error("Error in getting the user information : " + e.getMessage());
             throw new RuntimeException("Error in getting the user. Try again later.");
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
         }
         return user;
     }
