@@ -55,7 +55,7 @@ public class FlightController {
         return allFlights;
     }
 
-    @GetMapping("/searchFlights")
+    @PostMapping("/searchFlights")
     public List<FlightSchedule> searchFlights(@RequestBody SearchFlightRequest searchFlightRequest) throws SQLException {
         log.debug("Searching flights.");
         List<FlightSchedule> flights = flightManager.searchFlights(searchFlightRequest);

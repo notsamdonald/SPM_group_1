@@ -35,10 +35,10 @@ public class FlightDAO {
             "L.airport_ID, L.date_time, D.airport_ID, D.date_time " +
                 "from flight F, lands L, departures D WHERE  F.ID = D.flight_ID AND F.ID = L.flight_ID;";
 
-    private final String SQL_SEARCH_Flights = "SELECT F.id, F.number, F.company, F.A_capacity, F.A_occupancy, F.A_fare, " +
+    private final String SQL_SEARCH_Flights = "SELECT F.ID, F.number, F.company, F.A_capacity, F.A_occupancy, F.A_fare, " +
             "F.B_capacity, F.B_occupancy, F.B_fare, F.C_capacity, F.C_occupancy, F.C_fare, " +
-            "L.airport_ID, L.date_time, D.airport_ID, D.date_time" +
-            "from flight F, lands L, departures D, WHERE  F.ID = D.flight_ID AND F.ID = L.flight_ID;" +
+            "L.airport_ID, L.date_time, D.airport_ID, D.date_time " +
+            "from flight F, lands L, departures D " +
             "WHERE F.ID = D.flight_ID AND F.ID = L.flight_ID " +
             "AND L.airport_ID = ? AND D.airport_ID = ? AND D.date_time LIKE ? " +
             "AND (" +
@@ -222,7 +222,7 @@ public class FlightDAO {
             PreparedStatement ps = conn.prepareStatement(SQL_SEARCH_Flights);
             ps.setInt(1, searchFlightRequest.getLandAirportId());
             ps.setInt(2, searchFlightRequest.getDepartAirportId());
-            ps.setDate(3, Date.valueOf(searchFlightRequest.getDepartDateTime()));
+            ps.setString(3, "%" + searchFlightRequest.getDepartDateTime().toString() + "%");
             ps.setInt(4, searchFlightRequest.getNumberOfTravellers());
             ps.setInt(5, searchFlightRequest.getNumberOfTravellers());
             ps.setInt(6, searchFlightRequest.getNumberOfTravellers());
@@ -249,8 +249,8 @@ public class FlightDAO {
                 flights.add(flightSchedule);
             }
         } catch (SQLException e) {
-            log.error("Error in getting all the flights information : " + e.getMessage());
-            throw new RuntimeException("Error in getting all the flights. Try again later.");
+            log.error("Error in searching the flights : " + e.getMessage());
+            throw new RuntimeException("Error in searching the flights. Try again later.");
         } finally {
             if (conn != null) {
                 conn.close();
