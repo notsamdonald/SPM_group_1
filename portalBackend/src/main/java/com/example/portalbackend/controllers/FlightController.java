@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/flight")
+@CrossOrigin(origins = "*")
 public class FlightController {
     private Logger log = LoggerFactory.getLogger(FlightController.class);
 
