@@ -30,10 +30,10 @@ public class FlightDAO {
     private final String SQL_FLIGHT_ID_BY_NUMBER = "SELECT id FROM FLIGHT WHERE NUMBER = ?";
     private final String SQL_FLIGHT_BY_NUMBER = "SELECT * FROM FLIGHT WHERE NUMBER = ?";
 
-    private final String SQL_GET_ALL_Flights = "SELECT F.id, F.number, F.company, F.A_capacity, F.A_occupancy, F.A_fare, " +
+    private final String SQL_GET_ALL_Flights = "SELECT F.ID, F.number, F.company, F.A_capacity, F.A_occupancy, F.A_fare, " +
         "F.B_capacity, F.B_occupancy, F.B_fare, F.C_capacity, F.C_occupancy, F.C_fare, " +
-            "L.airport_ID, L.date_time, D.airport_ID, D.date_time" +
-                "from flight F, lands L, departures D, WHERE  F.ID = D.flight_ID AND F.ID = L.flight_ID;";
+            "L.airport_ID, L.date_time, D.airport_ID, D.date_time " +
+                "from flight F, lands L, departures D WHERE  F.ID = D.flight_ID AND F.ID = L.flight_ID;";
 
     private final String SQL_SEARCH_Flights = "SELECT F.id, F.number, F.company, F.A_capacity, F.A_occupancy, F.A_fare, " +
             "F.B_capacity, F.B_occupancy, F.B_fare, F.C_capacity, F.C_occupancy, F.C_fare, " +
