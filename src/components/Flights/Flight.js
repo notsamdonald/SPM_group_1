@@ -10,7 +10,7 @@ const Flight = (props) => {
     <li className={classes.flight}>
       <div className={classes.flightDetails}>
         <h3>{props.name}</h3>
-        <div className={classes.time}>{props.time}</div>
+        <div className={classes.time}>{props.departDateTime}</div>
         <div className={classes.price}>{price}</div>
       </div>
       <div>
