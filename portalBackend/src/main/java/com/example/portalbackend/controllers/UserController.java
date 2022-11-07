@@ -15,6 +15,7 @@ import java.sql.SQLException;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "*")
 public class UserController {
     private Logger log = LoggerFactory.getLogger(FlightController.class);
 
