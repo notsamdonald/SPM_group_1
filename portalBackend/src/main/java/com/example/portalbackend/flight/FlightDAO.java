@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.example.portalbackend.database.JDBCConnectionManager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class FlightDAO {
@@ -29,6 +29,23 @@ public class FlightDAO {
 
     private final String SQL_FLIGHT_ID_BY_NUMBER = "SELECT id FROM FLIGHT WHERE NUMBER = ?";
     private final String SQL_FLIGHT_BY_NUMBER = "SELECT * FROM FLIGHT WHERE NUMBER = ?";
+
+    private final String SQL_GET_ALL_Flights = "SELECT F.id, F.number, F.company, F.A_capacity, F.A_occupancy, F.A_fare, " +
+        "F.B_capacity, F.B_occupancy, F.B_fare, F.C_capacity, F.C_occupancy, F.C_fare, " +
+            "L.airport_ID, L.date_time, D.airport_ID, D.date_time" +
+                "from flight F, lands L, departures D, WHERE  F.ID = D.flight_ID AND F.ID = L.flight_ID;";
+
+    private final String SQL_SEARCH_Flights = "SELECT F.id, F.number, F.company, F.A_capacity, F.A_occupancy, F.A_fare, " +
+            "F.B_capacity, F.B_occupancy, F.B_fare, F.C_capacity, F.C_occupancy, F.C_fare, " +
+            "L.airport_ID, L.date_time, D.airport_ID, D.date_time" +
+            "from flight F, lands L, departures D, WHERE  F.ID = D.flight_ID AND F.ID = L.flight_ID;" +
+            "WHERE F.ID = D.flight_ID AND F.ID = L.flight_ID " +
+            "AND L.airport_ID = ? AND D.airport_ID = ? AND D.date_time LIKE ? " +
+            "AND (" +
+            "F.A_capacity - F.A_occupancy >= ? " +
+            "OR F.B_capacity - F.B_occupancy >= ? " +
+            "OR F.C_capacity - F.C_occupancy >= ?" +
+            ");";
 
     public void addFlight(Flight newFlight) throws SQLException {
         Connection conn = null;
@@ -154,5 +171,91 @@ public class FlightDAO {
                 conn.close();
             }
         }
+    }
+
+    public List<FlightSchedule> getAllFlights() throws SQLException {
+        List<FlightSchedule> allFlights = new ArrayList<>();
+        FlightSchedule flightSchedule = null;
+        Connection conn = null;
+        try {
+            conn = connectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SQL_GET_ALL_Flights);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String number = resultSet.getString(2);
+                String company = resultSet.getString(3);
+                int aCapacity = resultSet.getInt(4);
+                int aOccupancy = resultSet.getInt(5);
+                int aFare = resultSet.getInt(6);
+                int bCapacity = resultSet.getInt(7);
+                int bOccupancy = resultSet.getInt(8);
+                int bFare = resultSet.getInt(9);
+                int cCapacity = resultSet.getInt(10);
+                int cOccupancy = resultSet.getInt(11);
+                int cFare = resultSet.getInt(12);
+                int landAirportId = resultSet.getInt(13);
+                LocalDate landDateTime = resultSet.getDate(14).toLocalDate();
+                int departAirportId = resultSet.getInt(15);
+                LocalDate departDateTime = resultSet.getDate(16).toLocalDate();
+
+                flightSchedule = new FlightSchedule(id,number,company,aCapacity,aOccupancy,aFare,bCapacity,bOccupancy,bFare,cCapacity,cOccupancy,cFare,landAirportId,landDateTime,departAirportId,departDateTime);
+                allFlights.add(flightSchedule);
+            }
+        } catch (SQLException e) {
+            log.error("Error in getting all the flights information : " + e.getMessage());
+            throw new RuntimeException("Error in getting all the flights. Try again later.");
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return allFlights;
+    }
+
+    public List<FlightSchedule> searchFlights(SearchFlightRequest searchFlightRequest) throws SQLException {
+        List<FlightSchedule> flights = new ArrayList<>();
+        FlightSchedule flightSchedule = null;
+        Connection conn = null;
+        try {
+            conn = connectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SQL_SEARCH_Flights);
+            ps.setInt(1, searchFlightRequest.getLandAirportId());
+            ps.setInt(2, searchFlightRequest.getDepartAirportId());
+            ps.setDate(3, Date.valueOf(searchFlightRequest.getDepartDateTime()));
+            ps.setInt(4, searchFlightRequest.getNumberOfTravellers());
+            ps.setInt(5, searchFlightRequest.getNumberOfTravellers());
+            ps.setInt(6, searchFlightRequest.getNumberOfTravellers());
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String number = resultSet.getString(2);
+                String company = resultSet.getString(3);
+                int aCapacity = resultSet.getInt(4);
+                int aOccupancy = resultSet.getInt(5);
+                int aFare = resultSet.getInt(6);
+                int bCapacity = resultSet.getInt(7);
+                int bOccupancy = resultSet.getInt(8);
+                int bFare = resultSet.getInt(9);
+                int cCapacity = resultSet.getInt(10);
+                int cOccupancy = resultSet.getInt(11);
+                int cFare = resultSet.getInt(12);
+                int landAirportId = resultSet.getInt(13);
+                LocalDate landDateTime = resultSet.getDate(14).toLocalDate();
+                int departAirportId = resultSet.getInt(15);
+                LocalDate departDateTime = resultSet.getDate(16).toLocalDate();
+
+                flightSchedule = new FlightSchedule(id,number,company,aCapacity,aOccupancy,aFare,bCapacity,bOccupancy,bFare,cCapacity,cOccupancy,cFare,landAirportId,landDateTime,departAirportId,departDateTime);
+                flights.add(flightSchedule);
+            }
+        } catch (SQLException e) {
+            log.error("Error in getting all the flights information : " + e.getMessage());
+            throw new RuntimeException("Error in getting all the flights. Try again later.");
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return flights;
     }
 }
