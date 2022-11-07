@@ -245,7 +245,7 @@ public class FlightDAO {
                 int departAirportId = resultSet.getInt(15);
                 LocalDate departDateTime = resultSet.getDate(16).toLocalDate();
 
-                flightSchedule = new FlightSchedule(id,number,company,aCapacity,aOccupancy,aFare,bCapacity,bOccupancy,bFare,cCapacity,cOccupancy,cFare,landAirportId,landDateTime,departAirportId,departDateTime);
+                flightSchedule = new FlightSchedule(id,number,company,aCapacity,aOccupancy,aFare,bCapacity,bOccupancy,bFare,cCapacity,cOccupancy,cFare,departAirportId,departDateTime,landAirportId,landDateTime);
                 flights.add(flightSchedule);
             }
         } catch (SQLException e) {
