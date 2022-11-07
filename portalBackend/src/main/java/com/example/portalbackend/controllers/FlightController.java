@@ -3,15 +3,14 @@ package com.example.portalbackend.controllers;
 import com.example.portalbackend.common.Constants;
 import com.example.portalbackend.controllers.exceptions.FlightNotFoundException;
 import com.example.portalbackend.controllers.response.ResponseMessageField;
-import com.example.portalbackend.flight.Flight;
-import com.example.portalbackend.flight.FlightManager;
-import com.example.portalbackend.flight.FlightNumberField;
+import com.example.portalbackend.flight.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/flight")
@@ -47,5 +46,19 @@ public class FlightController {
         log.debug("Deleting flight.");
         flightManager.deleteFlight(flightNumber);
         return new ResponseMessageField(Constants.deleteFlightSuccessMessage);
+    }
+
+    @GetMapping("/getAllFlights")
+    public List<FlightSchedule> getAllFlights() throws SQLException {
+        log.debug("Getting all flights.");
+        List<FlightSchedule> allFlights = flightManager.getAllFlights();
+        return allFlights;
+    }
+
+    @PostMapping("/searchFlights")
+    public List<FlightSchedule> searchFlights(@RequestBody SearchFlightRequest searchFlightRequest) throws SQLException {
+        log.debug("Searching flights.");
+        List<FlightSchedule> flights = flightManager.searchFlights(searchFlightRequest);
+        return flights;
     }
 }

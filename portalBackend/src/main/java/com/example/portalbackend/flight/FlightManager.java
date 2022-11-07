@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Component
 public class FlightManager {
@@ -106,6 +107,24 @@ public class FlightManager {
             flightDAO.deleteFlight(flightNumber);
         } catch (SQLException e) {
             throw new RuntimeException("Error while deleting the flight with number " + flightNumber + ".");
+        }
+    }
+
+    public List<FlightSchedule> getAllFlights() throws SQLException {
+        try {
+            List<FlightSchedule> allFlights =  flightDAO.getAllFlights();
+            return allFlights;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in fetching all flights");
+        }
+    }
+
+    public List<FlightSchedule> searchFlights(SearchFlightRequest searchFlightRequest) throws SQLException {
+        try {
+            List<FlightSchedule> flights =  flightDAO.searchFlights(searchFlightRequest);
+            return flights;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in fetching flights based on search parameters");
         }
     }
 }
