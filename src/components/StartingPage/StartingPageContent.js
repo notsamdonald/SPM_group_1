@@ -17,11 +17,14 @@ const StartingPageContent = () => {
       "http://localhost:8080/flight/searchFlights",
       {
         method: "POST",
-        body: {
+        body: JSON.stringify({
           landAirportId: 10,
           departAirportId: 5,
           departDateTime: "2022-12-01",
           numberOfTravellers: 2,
+        }),
+        headers: {
+          "Content-Type": "application/json",
         },
       }
     );
