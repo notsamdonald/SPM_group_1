@@ -3,15 +3,18 @@ import FlightList from "../Flights/FlightList";
 import AuthContext from "../../store/auth-context";
 import classes from "./StartingPageContent.module.css";
 import SearchForm from "../Search/SearchForm";
+import MainFilter from "../Filter/MainFilter";
 
 const StartingPageContent = () => {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.isLoggedIn;
   const [flights, setFlights] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [httpError, setHttpError] = useState();
+  const [isError, setIsError] = useState(false);
 
   const fetchFlights = async () => {
+    setIsLoading(true);
     const response = await fetch(
       // "https://react-http-b53cd-default-rtdb.firebaseio.com/meals.json"
       "http://localhost:8080/flight/searchFlights",
@@ -55,34 +58,47 @@ const StartingPageContent = () => {
 
   const searchHandler = () => {
     fetchFlights().catch((error) => {
+      // console.log("errorrrr:");
       setIsLoading(false);
       // setHttpError(error.message);
-      setHttpError("DUMMY ERROR");
+      setHttpError("Error fetching flights from server");
+      setIsError(true);
     });
   };
 
-  const loadingDisplay = () => {
-    <section className={classes.FlightsLoading}>
-      <p>Loading...</p>
-    </section>;
+  const maxPriceFilterHandler = (maxPrice) => {
+    console.log(maxPrice);
+    const filteredFlights = flights.filter(
+      (flight) => flight.price <= maxPrice
+    );
+    setFlights(filteredFlights);
   };
 
-  const errorDisplay = () => {
-    return (
-      <section className={classes.FlightsError}>
-        <p>{httpError}</p>
-      </section>
-    );
-  };
+  // const loadingDisplay = () => {};
+
+  // const errorDisplay = () => {};
 
   return (
     <section className={classes.starting}>
       {isLoggedIn && (
         <div>
           <SearchForm searchHandler={searchHandler}></SearchForm>
-          {isLoading && loadingDisplay}
-          {httpError && errorDisplay}
-          {<FlightList flights={flights}></FlightList>}
+          {isLoading && (
+            <section className={classes.FlightsLoading}>
+              <p>Loading...</p>
+            </section>
+          )}
+          {httpError && (
+            <section className={classes.FlightsError}>
+              <p>{httpError}</p>
+            </section>
+          )}
+          <MainFilter maxPriceFilter={maxPriceFilterHandler}></MainFilter>
+          {flights.length !== 0 && (
+            <div className={classes.FlightFilter}>
+              <FlightList flights={flights}></FlightList>
+            </div>
+          )}
         </div>
       )}
       {!isLoggedIn && (

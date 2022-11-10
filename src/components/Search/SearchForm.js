@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 
 import Button from "@mui/material/Button";
@@ -10,8 +10,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import MenuItem from "@mui/material/MenuItem";
 import Autocomplete from "@mui/material/Autocomplete";
-
-import FlightList from "../Flights/FlightList";
 
 const airportList = [
   { code: "AD", label: "Andorra" },
@@ -38,11 +36,22 @@ const SearchForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // if (departureValue == null) alert("Select Departure Airport");
-    // if (arrivalValue == null) alert("Select Arrival Airport");
-    // if (dateValue == null) alert("Select Departure Date");
-    // if (passengerCount > 7 || passengerCount < 1)
+    // if (departureValue == null) {
+    //   alert("Select Departure Airport");
+    //   return;
+    // }
+    // if (arrivalValue == null) {
+    //   alert("Select Arrival Airport");
+    //   return;
+    // }
+    // if (dateValue == null) {
+    //   alert("Select Departure Date");
+    //   return;
+    // }
+    // if (passengerCount > 7 || passengerCount < 1) {
     //   alert("Select Passenger Count");
+    //   return;
+    // }
 
     props.searchHandler();
 

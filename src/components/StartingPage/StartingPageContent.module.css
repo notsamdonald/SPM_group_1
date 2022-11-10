@@ -6,3 +6,17 @@
 .starting h1 {
   font-size: 5rem;
 }
+
+.FlightsLoading {
+  text-align: center;
+  color: white;
+}
+
+.FlightsError {
+  text-align: center;
+  color: red;
+}
+
+.FlightFilter {
+  display: inline;
+}

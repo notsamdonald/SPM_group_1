@@ -5,15 +5,6 @@
   animation: meals-appear 1s ease-out forwards;
 }
 
-.FlightsLoading {
-  text-align: center;
-  color: white;
-}
-
-.FlightsError {
-  text-align: center;
-  color: red;
-}
 
 .flights ul {
   list-style: none;
