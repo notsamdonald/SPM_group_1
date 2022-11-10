@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 
 import Button from "@mui/material/Button";
@@ -11,12 +11,14 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import MenuItem from "@mui/material/MenuItem";
 import Autocomplete from "@mui/material/Autocomplete";
 
+import FlightList from "../Flights/FlightList";
+
 const airportList = [
   { code: "AD", label: "Andorra" },
   { code: "ZW", label: "Zimbabwe" },
 ];
 
-const SearchForm = () => {
+const SearchForm = (props) => {
   const [dateValue, setValue] = React.useState(null);
   const [passengerCount = 1, setPassengerCount] = React.useState("");
   const [departureValue, setDepartureValue] = React.useState(null);
@@ -26,15 +28,25 @@ const SearchForm = () => {
     setPassengerCount(event.target.value);
   };
 
+  // useEffect(() => {
+  //   props.fetchFlights().catch((error) => {
+  //     setIsLoading(false);
+  //     // setHttpError(error.message);
+  //     setHttpError("DUMMY ERROR");
+  //   });
+  // }, []);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (departureValue == null) alert("Select Departure Airport");
-    if (arrivalValue == null) alert("Select Arrival Airport");
-    if (dateValue == null) alert("Select Departure Date");
-    if (passengerCount > 7 || passengerCount < 1)
-      alert("Select Passenger Count");
+    // if (departureValue == null) alert("Select Departure Airport");
+    // if (arrivalValue == null) alert("Select Arrival Airport");
+    // if (dateValue == null) alert("Select Departure Date");
+    // if (passengerCount > 7 || passengerCount < 1)
+    //   alert("Select Passenger Count");
 
-    let query = "http://localhost:8080/flight/searchFlights";
+    props.searchHandler();
+
+    // let query = "http://localhost:8080/flight/searchFlights";
   };
 
   return (
@@ -153,6 +165,7 @@ const SearchForm = () => {
         </Grid>
         {/* </Box> */}
       </form>
+      {}
     </div>
   );
 };
