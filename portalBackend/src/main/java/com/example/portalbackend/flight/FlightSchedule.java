@@ -1,6 +1,7 @@
 package com.example.portalbackend.flight;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class FlightSchedule {
     private final int id;
@@ -16,11 +17,11 @@ public class FlightSchedule {
     private final int cOccupancy;
     private final int cFare;
     private final int depart_airport_ID;
-    private final LocalDate depart_date_time;
+    private final LocalDateTime depart_date_time;
     private final int land_airport_ID;
-    private final LocalDate land_date_time;
+    private final LocalDateTime land_date_time;
 
-    public FlightSchedule(int id, String number, String company, int aCapacity, int aOccupancy, int aFare, int bCapacity, int bOccupancy, int bFare, int cCapacity, int cOccupancy, int cFare, int depart_airport_ID, LocalDate depart_date_time, int land_airport_ID, LocalDate land_date_time) {
+    public FlightSchedule(int id, String number, String company, int aCapacity, int aOccupancy, int aFare, int bCapacity, int bOccupancy, int bFare, int cCapacity, int cOccupancy, int cFare, int depart_airport_ID, LocalDateTime depart_date_time, int land_airport_ID, LocalDateTime land_date_time) {
         this.id = id;
         this.number = number;
         this.company = company;
@@ -91,7 +92,7 @@ public class FlightSchedule {
         return depart_airport_ID;
     }
 
-    public LocalDate getDepart_date_time() {
+    public LocalDateTime getDepart_date_time() {
         return depart_date_time;
     }
 
@@ -99,7 +100,7 @@ public class FlightSchedule {
         return land_airport_ID;
     }
 
-    public LocalDate getLand_date_time() {
+    public LocalDateTime getLand_date_time() {
         return land_date_time;
     }
 }

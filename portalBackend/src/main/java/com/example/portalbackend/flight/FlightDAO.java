@@ -10,6 +10,7 @@ import com.example.portalbackend.database.JDBCConnectionManager;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -195,11 +196,11 @@ public class FlightDAO {
                 int cOccupancy = resultSet.getInt(11);
                 int cFare = resultSet.getInt(12);
                 int landAirportId = resultSet.getInt(13);
-                LocalDate landDateTime = resultSet.getDate(14).toLocalDate();
+                LocalDateTime landDateTime = resultSet.getTimestamp(14).toLocalDateTime();
                 int departAirportId = resultSet.getInt(15);
-                LocalDate departDateTime = resultSet.getDate(16).toLocalDate();
+                LocalDateTime departDateTime = resultSet.getTimestamp(16).toLocalDateTime();
 
-                flightSchedule = new FlightSchedule(id,number,company,aCapacity,aOccupancy,aFare,bCapacity,bOccupancy,bFare,cCapacity,cOccupancy,cFare,landAirportId,landDateTime,departAirportId,departDateTime);
+                flightSchedule = new FlightSchedule(id,number,company,aCapacity,aOccupancy,aFare,bCapacity,bOccupancy,bFare,cCapacity,cOccupancy,cFare,departAirportId,departDateTime,landAirportId,landDateTime);
                 allFlights.add(flightSchedule);
             }
         } catch (SQLException e) {
@@ -241,9 +242,9 @@ public class FlightDAO {
                 int cOccupancy = resultSet.getInt(11);
                 int cFare = resultSet.getInt(12);
                 int landAirportId = resultSet.getInt(13);
-                LocalDate landDateTime = resultSet.getDate(14).toLocalDate();
+                LocalDateTime landDateTime = resultSet.getTimestamp(14).toLocalDateTime();
                 int departAirportId = resultSet.getInt(15);
-                LocalDate departDateTime = resultSet.getDate(16).toLocalDate();
+                LocalDateTime departDateTime = resultSet.getTimestamp(16).toLocalDateTime();
 
                 flightSchedule = new FlightSchedule(id,number,company,aCapacity,aOccupancy,aFare,bCapacity,bOccupancy,bFare,cCapacity,cOccupancy,cFare,departAirportId,departDateTime,landAirportId,landDateTime);
                 flights.add(flightSchedule);
