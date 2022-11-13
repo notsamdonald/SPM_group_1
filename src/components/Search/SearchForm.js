@@ -10,15 +10,26 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import MenuItem from "@mui/material/MenuItem";
 import Autocomplete from "@mui/material/Autocomplete";
+import moment from "moment";
 
 const airportList = [
-  { code: "AD", label: "Andorra" },
-  { code: "ZW", label: "Zimbabwe" },
+  { code: "1", label: "ORD" },
+  { code: "2", label: "DFW" },
+  { code: "3", label: "JFK" },
+  { code: "4", label: "LAX" },
+  { code: "5", label: "SFO" },
+  { code: "6", label: "CLT" },
+  { code: "7", label: "MIA" },
+  { code: "8", label: "AUK" },
+  { code: "9", label: "SYD" },
+  { code: "10", label: "LHR" },
+  { code: "11", label: "CDG" },
+  { code: "12", label: "FRA" },
 ];
 
 const SearchForm = (props) => {
   const [dateValue, setValue] = React.useState(null);
-  const [passengerCount = 1, setPassengerCount] = React.useState("");
+  const [passengerCount, setPassengerCount] = React.useState(1);
   const [departureValue, setDepartureValue] = React.useState(null);
   const [arrivalValue, setArrivalValue] = React.useState(null);
 
@@ -36,6 +47,7 @@ const SearchForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     // if (departureValue == null) {
     //   alert("Select Departure Airport");
     //   return;
@@ -52,8 +64,13 @@ const SearchForm = (props) => {
     //   alert("Select Passenger Count");
     //   return;
     // }
-
-    props.searchHandler();
+    
+    props.searchHandler(
+      parseInt(departureValue.code),
+      parseInt(arrivalValue.code),
+      dateValue.format("YYYY-MM-DD"),
+      passengerCount
+    );
 
     // let query = "http://localhost:8080/flight/searchFlights";
   };

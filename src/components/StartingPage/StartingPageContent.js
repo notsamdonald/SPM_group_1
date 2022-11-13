@@ -13,7 +13,12 @@ const StartingPageContent = () => {
   const [httpError, setHttpError] = useState();
   const [isError, setIsError] = useState(false);
 
-  const fetchFlights = async () => {
+  const fetchFlights = async (
+    departureValue,
+    arrivalValue,
+    dateValue,
+    passengerCount
+  ) => {
     setIsLoading(true);
     const response = await fetch(
       // "https://react-http-b53cd-default-rtdb.firebaseio.com/meals.json"
@@ -21,10 +26,15 @@ const StartingPageContent = () => {
       {
         method: "POST",
         body: JSON.stringify({
-          landAirportId: 10,
-          departAirportId: 5,
-          departDateTime: "2022-12-01",
-          numberOfTravellers: 2,
+          // landAirportId: 10,
+          landAirportId: arrivalValue,
+          departAirportId: departureValue,
+          
+          // departAirportId: 5,
+          departDateTime: dateValue,
+          // departDateTime: "2022-12-01",
+          numberOfTravellers: passengerCount,
+          // numberOfTravellers: 2,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -37,33 +47,49 @@ const StartingPageContent = () => {
       throw new Error("Something went wrong!");
     }
     const responseData = await response.json();
+
     // const responseData = response;
     const loadedFlights = [];
     for (const key in responseData) {
+      // console.log("START");
+      // console.log(responseData[key]);
+      // console.log(responseData[key].depart_airport_ID);
+      // console.log(responseData[key].land_airport_ID);
+      // console.log(responseData[key].depart_date_time);
+      // console.log(responseData[key].land_date_time);
+      // console.log("END");
       loadedFlights.push({
         id: key,
         // name: responseData[key].name,
         name: responseData[key].company,
         // description: responseData[key].description,
         departDateTime: responseData[key].depart_date_time,
-        price: responseData[key].aFare,
+        price: responseData[key].aFare * passengerCount,
         // price: responseData[key].company,
       });
     }
 
     setFlights(loadedFlights);
+    console.log(loadedFlights);
     // setFlights(DUMMY_FLIGHTS);
     setIsLoading(false);
   };
 
-  const searchHandler = () => {
-    fetchFlights().catch((error) => {
-      // console.log("errorrrr:");
-      setIsLoading(false);
-      // setHttpError(error.message);
-      setHttpError("Error fetching flights from server");
-      setIsError(true);
-    });
+  const searchHandler = (
+    departureValue,
+    arrivalValue,
+    dateValue,
+    passengerCount
+  ) => {
+    fetchFlights(departureValue, arrivalValue, dateValue, passengerCount).catch(
+      (error) => {
+        // console.log("errorrrr:");
+        setIsLoading(false);
+        // setHttpError(error.message);
+        setHttpError("Error fetching flights from server");
+        setIsError(true);
+      }
+    );
   };
 
   const maxPriceFilterHandler = (maxPrice) => {
@@ -72,6 +98,7 @@ const StartingPageContent = () => {
       (flight) => flight.price <= maxPrice
     );
     setFlights(filteredFlights);
+    console.log(flights);
   };
 
   // const loadingDisplay = () => {};
@@ -97,6 +124,11 @@ const StartingPageContent = () => {
           {flights.length !== 0 && (
             <div className={classes.FlightFilter}>
               <FlightList flights={flights}></FlightList>
+            </div>
+          )}
+          {flights.length === 0 && (
+            <div>
+              <h2>No Flights</h2>
             </div>
           )}
         </div>
