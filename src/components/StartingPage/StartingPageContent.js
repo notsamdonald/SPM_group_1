@@ -5,6 +5,30 @@ import classes from "./StartingPageContent.module.css";
 import SearchForm from "../Search/SearchForm";
 import MainFilter from "../Filter/MainFilter";
 
+function padTo2Digits(num) {
+  return num.toString().padStart(2, "0");
+}
+
+function convertMsToHM(milliseconds) {
+  let seconds = Math.floor(milliseconds / 1000);
+  let minutes = Math.floor(seconds / 60);
+  let hours = Math.floor(minutes / 60);
+
+  seconds = seconds % 60;
+  // 👇️ if seconds are greater than 30, round minutes up (optional)
+  minutes = seconds >= 30 ? minutes + 1 : minutes;
+
+  minutes = minutes % 60;
+
+  // 👇️ If you don't want to roll hours over, e.g. 24 to 00
+  // 👇️ comment (or remove) the line below
+  // commenting next line gets you `24:00:00` instead of `00:00:00`
+  // or `36:15:31` instead of `12:15:31`, etc.
+  hours = hours % 24;
+
+  return `${padTo2Digits(hours)} hours, ${padTo2Digits(minutes)} minutes`;
+}
+
 const StartingPageContent = () => {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.isLoggedIn;
@@ -58,16 +82,25 @@ const StartingPageContent = () => {
       // console.log(responseData[key].depart_date_time);
       // console.log(responseData[key].land_date_time);
       // console.log("END");
+      const duration = convertMsToHM(
+        Math.abs(
+          new Date(responseData[key].depart_date_time.replace("T", " ")) -
+            new Date(responseData[key].land_date_time.replace("T", " "))
+        )
+      );
+
       loadedFlights.push({
         id: key,
         // name: responseData[key].name,
         name: responseData[key].company,
         // description: responseData[key].description,
-        departDateTime: responseData[key].depart_date_time,
+        departDateTime: responseData[key].depart_date_time.split("T")[1],
         price: responseData[key].aFare * passengerCount,
         from: departureValue.label,
         to: arrivalValue.label,
         passengers: passengerCount,
+        duration: duration,
+
         // price: responseData[key].company,
       });
     }
