@@ -67,7 +67,7 @@ def create_airport_tables():
     return airport_df, airport_location_df, location_df
 
 
-def create_tables(d1, num_flights=50):
+def create_tables(d1, num_flight_routes=50, num_flight_per_route=5):
     """ Create all tables """
 
     airport_df, airport_location_df, location_df = create_airport_tables()
@@ -80,28 +80,42 @@ def create_tables(d1, num_flights=50):
     lands_df = pd.DataFrame(columns=['ID', 'Airport ID', 'Flight ID', 'Date Time'])
 
     base_capacity = 200
+    id = 0
 
-    for i in range(num_flights):
-        # Setting every 10th flight to be full
-        full = True if i % 10 == 0 else False
+    for i in range(num_flight_routes):
 
-        # Randomly selecting an airline
-        airline = random.sample(AIRLINES, 1)[0]
+        # Set up flight route
 
-        # Randomly construct a sample flight df
-        # Quick fix to make sure that the flight number is unique
-        flight_df.loc[i] = [i+1, f"{airline}_{i+1}", airline,
-                            base_capacity, gen_occupancy(base_capacity, full), gen_price(),
-                            int(base_capacity / 2), gen_occupancy(int(base_capacity / 2), full), gen_price(upscale=2),
-                            int(base_capacity / 4), gen_occupancy(int(base_capacity / 4), full), gen_price(upscale=10)]
+        # Randomly select two unique airports
+        departure_airport_id, destination_airport_id = random.sample(range(0, 13), 2)
 
-        # Calculate random departure and landing times
-        departure_time = random_date(d1, d1 + timedelta(hours=12))
-        lands_time = random_date(departure_time, departure_time + timedelta(hours=12))
+        # Randomly select departure date base
+        departure_date_base = random_date(d1, d1 + timedelta(days=random.randint(1, 10)))
 
-        # Create departure and landing tables
-        departure_df.loc[i] = [i+1, randrange(0, 13), i+1, departure_time]
-        lands_df.loc[i] = [i+1, randrange(0, 13), i+1, lands_time]
+        for j in range(num_flight_per_route):
+
+            # Randomly set full to true with 10% chance
+            full = random.random() < 0.2
+
+            # Randomly selecting an airline
+            airline = random.sample(AIRLINES, 1)[0]
+
+            # Randomly construct a sample flight df
+            # Quick fix to make sure that the flight number is unique
+            flight_df.loc[id] = [id+1, f"{airline}_{id+1}", airline,
+                                base_capacity, gen_occupancy(base_capacity, full), gen_price(),
+                                int(base_capacity / 2), gen_occupancy(int(base_capacity / 2), full), gen_price(upscale=2),
+                                int(base_capacity / 4), gen_occupancy(int(base_capacity / 4), full), gen_price(upscale=10)]
+
+            # Calculate random departure and landing times
+            departure_time = random_date(departure_date_base, departure_date_base + timedelta(hours=14))
+            lands_time = random_date(departure_time, departure_time + timedelta(hours=6))
+
+            # Create departure and landing tables
+            departure_df.loc[id] = [id+1, departure_airport_id, id+1, departure_time]
+            lands_df.loc[id] = [id+1, destination_airport_id, id+1, lands_time]
+
+            id += 1
 
     tables = (airport_df, airport_location_df, location_df, flight_df, departure_df, lands_df)
     return tables
@@ -111,7 +125,7 @@ def main():
     # Creating a random date a month into the future
     today = datetime.today()
     d1 = today + timedelta(days=30)
-
+    d1 = d1.replace(hour=1, minute=0)
     tables = create_tables(d1)
     table_names = ['airport', 'airport_location', 'location', 'flight', 'departure', 'lands']
 

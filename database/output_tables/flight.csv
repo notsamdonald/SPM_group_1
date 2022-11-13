@@ -1,50 +1,250 @@
-1,Frontier Airlines_1,Frontier Airlines,200,200,224,100,100,288,50,50,2257
-2,British Airways_2,British Airways,200,189,194,100,28,260,50,5,1887
-3,Air New Zealand_3,Air New Zealand,200,7,121,100,3,585,50,20,1900
-4,Frontier Airlines_4,Frontier Airlines,200,89,113,100,28,441,50,34,2040
-5,Air New Zealand_5,Air New Zealand,200,43,213,100,79,514,50,47,2448
-6,JetBlue_6,JetBlue,200,184,178,100,82,453,50,12,1259
-7,Alaska Airlines_7,Alaska Airlines,200,130,198,100,44,406,50,30,1786
-8,United Airlines_8,United Airlines,200,54,206,100,36,295,50,26,1545
-9,Air New Zealand_9,Air New Zealand,200,43,149,100,61,577,50,0,2747
-10,Southwest Airlines_10,Southwest Airlines,200,67,150,100,97,290,50,25,1311
-11,JetBlue_11,JetBlue,200,200,263,100,100,559,50,50,2587
-12,Virgin America_12,Virgin America,200,77,263,100,90,561,50,21,1652
-13,United Airlines_13,United Airlines,200,175,240,100,8,213,50,32,2233
-14,Frontier Airlines_14,Frontier Airlines,200,196,281,100,11,291,50,11,2399
-15,JetBlue_15,JetBlue,200,3,142,100,33,575,50,6,2178
-16,Alaska Airlines_16,Alaska Airlines,200,53,173,100,22,233,50,48,1635
-17,United Airlines_17,United Airlines,200,142,163,100,29,569,50,26,1275
-18,JetBlue_18,JetBlue,200,54,115,100,38,555,50,45,1493
-19,Delta Airlines_19,Delta Airlines,200,136,139,100,32,222,50,24,1347
-20,JetBlue_20,JetBlue,200,38,267,100,67,561,50,14,2404
-21,Virgin America_21,Virgin America,200,200,246,100,100,594,50,50,1011
-22,Alaska Airlines_22,Alaska Airlines,200,148,178,100,2,583,50,28,2872
-23,Delta Airlines_23,Delta Airlines,200,169,221,100,19,397,50,40,2935
-24,American Airlines_24,American Airlines,200,20,268,100,95,484,50,12,1197
-25,Alaska Airlines_25,Alaska Airlines,200,14,253,100,47,201,50,28,1882
-26,Southwest Airlines_26,Southwest Airlines,200,45,245,100,35,508,50,33,1337
-27,Virgin America_27,Virgin America,200,14,107,100,62,503,50,45,2282
-28,Virgin America_28,Virgin America,200,62,281,100,4,230,50,3,1925
-29,American Airlines_29,American Airlines,200,192,188,100,35,442,50,48,2655
-30,Air New Zealand_30,Air New Zealand,200,98,174,100,59,252,50,37,1435
-31,Air New Zealand_31,Air New Zealand,200,200,117,100,100,315,50,50,2513
-32,Virgin America_32,Virgin America,200,127,204,100,94,289,50,0,1059
-33,Air New Zealand_33,Air New Zealand,200,88,130,100,56,462,50,6,1307
-34,American Airlines_34,American Airlines,200,14,180,100,27,310,50,27,1423
-35,United Airlines_35,United Airlines,200,158,111,100,46,343,50,32,1107
-36,Air France_36,Air France,200,42,170,100,48,470,50,7,1766
-37,Air France_37,Air France,200,116,261,100,46,234,50,21,2066
-38,JetBlue_38,JetBlue,200,64,188,100,43,581,50,45,2594
-39,United Airlines_39,United Airlines,200,194,179,100,37,333,50,9,2681
-40,Frontier Airlines_40,Frontier Airlines,200,181,289,100,79,202,50,18,2959
-41,Alaska Airlines_41,Alaska Airlines,200,200,178,100,100,400,50,50,1623
-42,British Airways_42,British Airways,200,121,198,100,96,266,50,23,2469
-43,American Airlines_43,American Airlines,200,172,119,100,82,548,50,32,1013
-44,Air France_44,Air France,200,75,132,100,28,368,50,19,1678
-45,American Airlines_45,American Airlines,200,0,157,100,64,467,50,25,1701
-46,Delta Airlines_46,Delta Airlines,200,175,176,100,22,454,50,6,2889
-47,Air New Zealand_47,Air New Zealand,200,80,252,100,25,204,50,32,1236
-48,Air France_48,Air France,200,60,230,100,52,536,50,4,2502
-49,Virgin America_49,Virgin America,200,149,136,100,96,391,50,46,2189
-50,Frontier Airlines_50,Frontier Airlines,200,33,212,100,78,378,50,25,1497
+1,Southwest Airlines_1,Southwest Airlines,200,82,283,100,81,386,50,30,2941
+2,JetBlue_2,JetBlue,200,92,114,100,1,246,50,9,1390
+3,Alaska Airlines_3,Alaska Airlines,200,200,144,100,100,488,50,50,1946
+4,American Airlines_4,American Airlines,200,116,166,100,0,407,50,17,1682
+5,Frontier Airlines_5,Frontier Airlines,200,160,203,100,78,303,50,49,1287
+6,JetBlue_6,JetBlue,200,38,116,100,91,514,50,41,2459
+7,Frontier Airlines_7,Frontier Airlines,200,1,233,100,97,338,50,37,2701
+8,Air France_8,Air France,200,61,250,100,4,232,50,8,2222
+9,Alaska Airlines_9,Alaska Airlines,200,200,169,100,100,332,50,50,2466
+10,JetBlue_10,JetBlue,200,76,195,100,45,477,50,45,1632
+11,Air France_11,Air France,200,115,191,100,35,299,50,6,2899
+12,Air New Zealand_12,Air New Zealand,200,181,104,100,8,277,50,36,2568
+13,United Airlines_13,United Airlines,200,200,171,100,100,335,50,50,2005
+14,Southwest Airlines_14,Southwest Airlines,200,132,147,100,22,352,50,44,1151
+15,Air France_15,Air France,200,200,228,100,100,252,50,50,2746
+16,Alaska Airlines_16,Alaska Airlines,200,3,195,100,51,535,50,15,2138
+17,Frontier Airlines_17,Frontier Airlines,200,74,291,100,21,208,50,18,1334
+18,JetBlue_18,JetBlue,200,99,183,100,88,243,50,6,1204
+19,American Airlines_19,American Airlines,200,44,208,100,91,260,50,20,1746
+20,Southwest Airlines_20,Southwest Airlines,200,8,138,100,39,434,50,38,2185
+21,Southwest Airlines_21,Southwest Airlines,200,143,123,100,15,284,50,10,1570
+22,Alaska Airlines_22,Alaska Airlines,200,29,272,100,0,219,50,40,2304
+23,Southwest Airlines_23,Southwest Airlines,200,4,149,100,69,418,50,28,2030
+24,Southwest Airlines_24,Southwest Airlines,200,64,180,100,33,483,50,37,2769
+25,Virgin America_25,Virgin America,200,100,116,100,83,523,50,8,2178
+26,Virgin America_26,Virgin America,200,6,152,100,98,215,50,1,1514
+27,Alaska Airlines_27,Alaska Airlines,200,143,126,100,37,314,50,17,1901
+28,JetBlue_28,JetBlue,200,200,250,100,100,272,50,50,1864
+29,Air France_29,Air France,200,94,265,100,14,312,50,34,2526
+30,JetBlue_30,JetBlue,200,131,176,100,70,266,50,7,1820
+31,Frontier Airlines_31,Frontier Airlines,200,120,194,100,73,400,50,0,2688
+32,British Airways_32,British Airways,200,34,125,100,60,424,50,16,1047
+33,Alaska Airlines_33,Alaska Airlines,200,91,244,100,6,277,50,42,1301
+34,Southwest Airlines_34,Southwest Airlines,200,68,130,100,90,590,50,31,2197
+35,American Airlines_35,American Airlines,200,18,196,100,10,512,50,40,2226
+36,Virgin America_36,Virgin America,200,108,204,100,88,432,50,10,1935
+37,United Airlines_37,United Airlines,200,104,164,100,60,247,50,43,1097
+38,Virgin America_38,Virgin America,200,84,191,100,82,509,50,26,1108
+39,American Airlines_39,American Airlines,200,200,218,100,100,356,50,50,1072
+40,Southwest Airlines_40,Southwest Airlines,200,171,274,100,61,405,50,36,1524
+41,British Airways_41,British Airways,200,173,160,100,6,510,50,25,1454
+42,American Airlines_42,American Airlines,200,200,286,100,100,415,50,50,1032
+43,Delta Airlines_43,Delta Airlines,200,41,255,100,83,415,50,36,1844
+44,Air New Zealand_44,Air New Zealand,200,99,248,100,69,359,50,45,2318
+45,Air France_45,Air France,200,139,251,100,59,440,50,48,2991
+46,American Airlines_46,American Airlines,200,81,235,100,16,331,50,3,1756
+47,American Airlines_47,American Airlines,200,200,166,100,100,456,50,50,2941
+48,Frontier Airlines_48,Frontier Airlines,200,165,174,100,48,451,50,15,1488
+49,American Airlines_49,American Airlines,200,162,263,100,66,283,50,5,1082
+50,Southwest Airlines_50,Southwest Airlines,200,118,206,100,35,298,50,14,2932
+51,Air New Zealand_51,Air New Zealand,200,54,151,100,25,252,50,20,2820
+52,Virgin America_52,Virgin America,200,35,158,100,61,256,50,25,1678
+53,Frontier Airlines_53,Frontier Airlines,200,47,175,100,16,334,50,26,2326
+54,American Airlines_54,American Airlines,200,99,238,100,77,360,50,13,2907
+55,Delta Airlines_55,Delta Airlines,200,139,220,100,83,416,50,26,2381
+56,Virgin America_56,Virgin America,200,48,276,100,0,434,50,23,1659
+57,Virgin America_57,Virgin America,200,99,295,100,24,400,50,21,1306
+58,Virgin America_58,Virgin America,200,103,168,100,33,576,50,30,1175
+59,Virgin America_59,Virgin America,200,102,282,100,8,594,50,49,1423
+60,Southwest Airlines_60,Southwest Airlines,200,152,116,100,91,250,50,49,2937
+61,Air France_61,Air France,200,122,111,100,12,292,50,29,1410
+62,Air France_62,Air France,200,182,215,100,45,527,50,43,2847
+63,JetBlue_63,JetBlue,200,148,252,100,42,375,50,32,1594
+64,Alaska Airlines_64,Alaska Airlines,200,38,278,100,72,496,50,34,2405
+65,JetBlue_65,JetBlue,200,183,213,100,25,553,50,41,1250
+66,Air New Zealand_66,Air New Zealand,200,78,291,100,32,291,50,31,1143
+67,Alaska Airlines_67,Alaska Airlines,200,1,244,100,36,355,50,8,2909
+68,Frontier Airlines_68,Frontier Airlines,200,200,223,100,100,510,50,50,2486
+69,Alaska Airlines_69,Alaska Airlines,200,1,143,100,6,445,50,46,1387
+70,American Airlines_70,American Airlines,200,40,269,100,88,279,50,7,1533
+71,Virgin America_71,Virgin America,200,200,237,100,100,532,50,50,1596
+72,United Airlines_72,United Airlines,200,200,170,100,100,365,50,50,1887
+73,Air France_73,Air France,200,134,204,100,60,599,50,48,2099
+74,American Airlines_74,American Airlines,200,79,121,100,63,490,50,40,1771
+75,Frontier Airlines_75,Frontier Airlines,200,45,114,100,13,466,50,20,1288
+76,United Airlines_76,United Airlines,200,50,104,100,10,432,50,24,1477
+77,Delta Airlines_77,Delta Airlines,200,3,162,100,39,383,50,44,1965
+78,British Airways_78,British Airways,200,107,158,100,70,594,50,19,2863
+79,Frontier Airlines_79,Frontier Airlines,200,69,130,100,39,335,50,12,2430
+80,United Airlines_80,United Airlines,200,95,170,100,81,363,50,47,2484
+81,Air France_81,Air France,200,126,160,100,8,503,50,26,2068
+82,Air France_82,Air France,200,159,221,100,61,500,50,11,1486
+83,Southwest Airlines_83,Southwest Airlines,200,121,294,100,68,409,50,22,1929
+84,Southwest Airlines_84,Southwest Airlines,200,54,101,100,17,363,50,11,2603
+85,JetBlue_85,JetBlue,200,89,263,100,2,464,50,25,1597
+86,British Airways_86,British Airways,200,77,259,100,83,480,50,0,2712
+87,Alaska Airlines_87,Alaska Airlines,200,181,164,100,65,494,50,36,2903
+88,United Airlines_88,United Airlines,200,114,134,100,50,257,50,12,1825
+89,Air New Zealand_89,Air New Zealand,200,163,192,100,44,315,50,35,1079
+90,American Airlines_90,American Airlines,200,55,205,100,54,433,50,23,2227
+91,United Airlines_91,United Airlines,200,200,117,100,100,452,50,50,2438
+92,JetBlue_92,JetBlue,200,65,101,100,46,406,50,31,1593
+93,Southwest Airlines_93,Southwest Airlines,200,175,219,100,70,466,50,10,1785
+94,JetBlue_94,JetBlue,200,23,177,100,71,256,50,46,2902
+95,American Airlines_95,American Airlines,200,200,159,100,100,495,50,50,1390
+96,JetBlue_96,JetBlue,200,113,237,100,20,241,50,14,1745
+97,Frontier Airlines_97,Frontier Airlines,200,200,172,100,100,499,50,50,2181
+98,Air New Zealand_98,Air New Zealand,200,200,102,100,100,382,50,50,2269
+99,Delta Airlines_99,Delta Airlines,200,13,117,100,26,536,50,27,2352
+100,Delta Airlines_100,Delta Airlines,200,200,242,100,100,411,50,50,2283
+101,Virgin America_101,Virgin America,200,68,193,100,67,353,50,16,2678
+102,British Airways_102,British Airways,200,67,213,100,16,516,50,49,2447
+103,British Airways_103,British Airways,200,87,211,100,17,374,50,41,2715
+104,Alaska Airlines_104,Alaska Airlines,200,109,130,100,57,584,50,13,2610
+105,JetBlue_105,JetBlue,200,138,255,100,43,456,50,2,2114
+106,Air New Zealand_106,Air New Zealand,200,200,148,100,100,366,50,50,1447
+107,Delta Airlines_107,Delta Airlines,200,200,259,100,100,478,50,50,2609
+108,United Airlines_108,United Airlines,200,86,232,100,79,590,50,0,2135
+109,United Airlines_109,United Airlines,200,122,122,100,65,537,50,27,1334
+110,Alaska Airlines_110,Alaska Airlines,200,167,201,100,50,488,50,27,1945
+111,American Airlines_111,American Airlines,200,200,142,100,100,505,50,50,1935
+112,American Airlines_112,American Airlines,200,29,257,100,53,529,50,5,2238
+113,United Airlines_113,United Airlines,200,92,103,100,26,257,50,38,1258
+114,Southwest Airlines_114,Southwest Airlines,200,126,168,100,52,333,50,19,1450
+115,Alaska Airlines_115,Alaska Airlines,200,34,189,100,65,357,50,0,2897
+116,American Airlines_116,American Airlines,200,67,256,100,84,467,50,7,1619
+117,Southwest Airlines_117,Southwest Airlines,200,162,108,100,47,205,50,13,1575
+118,United Airlines_118,United Airlines,200,65,170,100,60,544,50,46,1797
+119,JetBlue_119,JetBlue,200,152,223,100,12,544,50,36,1122
+120,Delta Airlines_120,Delta Airlines,200,101,161,100,98,268,50,17,1686
+121,JetBlue_121,JetBlue,200,200,269,100,100,268,50,50,2374
+122,United Airlines_122,United Airlines,200,4,125,100,20,383,50,28,1056
+123,Air New Zealand_123,Air New Zealand,200,162,115,100,24,568,50,31,2417
+124,Virgin America_124,Virgin America,200,122,124,100,67,520,50,24,2946
+125,Southwest Airlines_125,Southwest Airlines,200,200,154,100,100,230,50,50,1443
+126,American Airlines_126,American Airlines,200,178,288,100,92,372,50,18,2715
+127,Air New Zealand_127,Air New Zealand,200,10,201,100,4,458,50,37,2004
+128,Delta Airlines_128,Delta Airlines,200,149,266,100,64,301,50,34,2200
+129,Air France_129,Air France,200,94,189,100,89,562,50,49,2550
+130,American Airlines_130,American Airlines,200,200,199,100,100,557,50,50,2618
+131,American Airlines_131,American Airlines,200,164,173,100,22,552,50,41,1510
+132,Air France_132,Air France,200,65,235,100,16,453,50,32,2038
+133,Virgin America_133,Virgin America,200,67,101,100,26,432,50,23,1281
+134,Alaska Airlines_134,Alaska Airlines,200,41,133,100,68,545,50,13,2456
+135,United Airlines_135,United Airlines,200,65,134,100,5,471,50,8,1000
+136,Southwest Airlines_136,Southwest Airlines,200,200,111,100,100,409,50,50,1425
+137,Air New Zealand_137,Air New Zealand,200,184,168,100,33,263,50,30,2140
+138,Air New Zealand_138,Air New Zealand,200,55,211,100,39,540,50,39,1700
+139,American Airlines_139,American Airlines,200,38,183,100,28,220,50,48,1438
+140,United Airlines_140,United Airlines,200,66,126,100,17,502,50,24,2539
+141,Delta Airlines_141,Delta Airlines,200,196,123,100,40,362,50,43,2152
+142,American Airlines_142,American Airlines,200,200,176,100,100,346,50,50,2833
+143,Alaska Airlines_143,Alaska Airlines,200,142,119,100,76,296,50,27,1548
+144,Delta Airlines_144,Delta Airlines,200,200,241,100,100,259,50,50,2024
+145,Air New Zealand_145,Air New Zealand,200,130,177,100,75,561,50,20,1694
+146,Air France_146,Air France,200,75,200,100,65,476,50,14,2140
+147,Virgin America_147,Virgin America,200,167,234,100,32,449,50,14,2293
+148,United Airlines_148,United Airlines,200,4,135,100,7,479,50,14,2895
+149,Alaska Airlines_149,Alaska Airlines,200,200,216,100,100,263,50,50,1801
+150,United Airlines_150,United Airlines,200,67,267,100,50,307,50,27,2871
+151,American Airlines_151,American Airlines,200,5,284,100,82,576,50,19,1454
+152,United Airlines_152,United Airlines,200,181,110,100,47,294,50,42,1387
+153,American Airlines_153,American Airlines,200,101,157,100,73,232,50,43,1954
+154,Alaska Airlines_154,Alaska Airlines,200,116,177,100,43,208,50,42,2974
+155,American Airlines_155,American Airlines,200,200,179,100,100,540,50,50,2097
+156,Southwest Airlines_156,Southwest Airlines,200,45,172,100,39,219,50,40,1731
+157,Air New Zealand_157,Air New Zealand,200,8,190,100,11,408,50,49,2167
+158,American Airlines_158,American Airlines,200,86,143,100,58,495,50,33,2446
+159,JetBlue_159,JetBlue,200,16,149,100,81,327,50,0,2829
+160,United Airlines_160,United Airlines,200,90,274,100,10,227,50,33,2582
+161,Delta Airlines_161,Delta Airlines,200,61,174,100,42,410,50,46,1534
+162,American Airlines_162,American Airlines,200,122,215,100,88,573,50,8,2280
+163,Alaska Airlines_163,Alaska Airlines,200,200,191,100,100,284,50,50,1616
+164,United Airlines_164,United Airlines,200,197,240,100,99,205,50,37,2028
+165,Southwest Airlines_165,Southwest Airlines,200,90,138,100,71,516,50,40,2712
+166,Frontier Airlines_166,Frontier Airlines,200,58,143,100,31,246,50,8,1070
+167,JetBlue_167,JetBlue,200,32,135,100,1,358,50,27,2744
+168,Alaska Airlines_168,Alaska Airlines,200,14,187,100,67,462,50,16,1537
+169,British Airways_169,British Airways,200,106,232,100,18,200,50,49,1167
+170,JetBlue_170,JetBlue,200,126,200,100,46,452,50,4,1655
+171,British Airways_171,British Airways,200,150,277,100,76,348,50,8,1394
+172,Air New Zealand_172,Air New Zealand,200,16,148,100,7,300,50,25,2139
+173,Alaska Airlines_173,Alaska Airlines,200,145,198,100,97,286,50,34,1956
+174,Virgin America_174,Virgin America,200,144,232,100,30,537,50,14,2204
+175,British Airways_175,British Airways,200,78,105,100,23,209,50,42,1280
+176,JetBlue_176,JetBlue,200,95,115,100,89,403,50,37,2004
+177,American Airlines_177,American Airlines,200,88,265,100,24,213,50,32,1031
+178,Southwest Airlines_178,Southwest Airlines,200,200,215,100,100,584,50,50,2367
+179,Alaska Airlines_179,Alaska Airlines,200,83,242,100,55,292,50,0,2347
+180,Air New Zealand_180,Air New Zealand,200,200,137,100,100,243,50,50,1852
+181,Southwest Airlines_181,Southwest Airlines,200,126,270,100,74,210,50,4,1134
+182,Frontier Airlines_182,Frontier Airlines,200,99,261,100,15,297,50,8,1499
+183,United Airlines_183,United Airlines,200,100,221,100,39,592,50,48,1720
+184,Southwest Airlines_184,Southwest Airlines,200,66,298,100,47,576,50,44,1390
+185,Alaska Airlines_185,Alaska Airlines,200,122,293,100,11,229,50,7,2791
+186,Southwest Airlines_186,Southwest Airlines,200,32,148,100,36,464,50,29,2243
+187,British Airways_187,British Airways,200,91,163,100,50,245,50,29,2946
+188,American Airlines_188,American Airlines,200,106,272,100,81,269,50,1,1422
+189,Frontier Airlines_189,Frontier Airlines,200,175,280,100,32,272,50,28,1482
+190,Southwest Airlines_190,Southwest Airlines,200,130,270,100,21,436,50,45,1646
+191,Alaska Airlines_191,Alaska Airlines,200,26,260,100,17,380,50,36,1047
+192,Alaska Airlines_192,Alaska Airlines,200,131,288,100,30,400,50,21,2883
+193,Virgin America_193,Virgin America,200,200,201,100,100,493,50,50,1292
+194,Virgin America_194,Virgin America,200,145,194,100,15,201,50,7,2071
+195,Air New Zealand_195,Air New Zealand,200,200,166,100,100,266,50,50,1936
+196,Air France_196,Air France,200,131,220,100,48,368,50,22,1308
+197,Delta Airlines_197,Delta Airlines,200,66,272,100,64,418,50,46,2268
+198,Delta Airlines_198,Delta Airlines,200,186,142,100,26,516,50,2,2744
+199,Alaska Airlines_199,Alaska Airlines,200,200,121,100,100,438,50,50,2789
+200,American Airlines_200,American Airlines,200,200,139,100,100,578,50,50,2163
+201,Air France_201,Air France,200,143,288,100,91,588,50,46,1333
+202,American Airlines_202,American Airlines,200,200,222,100,100,296,50,50,1032
+203,Frontier Airlines_203,Frontier Airlines,200,200,207,100,100,510,50,50,1157
+204,Air France_204,Air France,200,145,297,100,86,394,50,32,2192
+205,Air France_205,Air France,200,50,206,100,28,243,50,37,1284
+206,Air New Zealand_206,Air New Zealand,200,200,110,100,100,520,50,50,1697
+207,Delta Airlines_207,Delta Airlines,200,89,266,100,84,341,50,14,2180
+208,JetBlue_208,JetBlue,200,200,115,100,100,247,50,50,1629
+209,Frontier Airlines_209,Frontier Airlines,200,53,239,100,5,249,50,39,2298
+210,Frontier Airlines_210,Frontier Airlines,200,149,197,100,59,484,50,49,2623
+211,Air France_211,Air France,200,140,211,100,44,220,50,46,1945
+212,Virgin America_212,Virgin America,200,21,264,100,40,457,50,8,1147
+213,Air New Zealand_213,Air New Zealand,200,136,175,100,5,433,50,29,1484
+214,Air France_214,Air France,200,37,244,100,24,518,50,17,2851
+215,Alaska Airlines_215,Alaska Airlines,200,145,105,100,79,267,50,2,2438
+216,United Airlines_216,United Airlines,200,196,200,100,48,597,50,17,1197
+217,United Airlines_217,United Airlines,200,10,234,100,42,337,50,41,1841
+218,British Airways_218,British Airways,200,99,162,100,88,305,50,4,1849
+219,British Airways_219,British Airways,200,3,162,100,23,494,50,36,2905
+220,JetBlue_220,JetBlue,200,110,298,100,20,480,50,10,1075
+221,Alaska Airlines_221,Alaska Airlines,200,107,202,100,1,452,50,26,1031
+222,JetBlue_222,JetBlue,200,200,218,100,100,417,50,50,2068
+223,British Airways_223,British Airways,200,31,147,100,73,575,50,42,1622
+224,British Airways_224,British Airways,200,180,242,100,73,326,50,9,2203
+225,JetBlue_225,JetBlue,200,25,253,100,21,354,50,27,2358
+226,Alaska Airlines_226,Alaska Airlines,200,65,221,100,0,343,50,29,1993
+227,Air France_227,Air France,200,151,180,100,77,466,50,11,1114
+228,Air France_228,Air France,200,66,297,100,33,290,50,30,1916
+229,Southwest Airlines_229,Southwest Airlines,200,15,191,100,24,354,50,14,1752
+230,Frontier Airlines_230,Frontier Airlines,200,18,100,100,34,413,50,35,2470
+231,JetBlue_231,JetBlue,200,145,145,100,92,352,50,5,1659
+232,United Airlines_232,United Airlines,200,13,264,100,45,583,50,35,1161
+233,Alaska Airlines_233,Alaska Airlines,200,57,276,100,77,539,50,31,1579
+234,American Airlines_234,American Airlines,200,178,291,100,13,344,50,32,2633
+235,British Airways_235,British Airways,200,46,236,100,39,243,50,12,1808
+236,United Airlines_236,United Airlines,200,90,223,100,0,592,50,33,1375
+237,Delta Airlines_237,Delta Airlines,200,156,256,100,88,427,50,44,1760
+238,JetBlue_238,JetBlue,200,51,151,100,83,453,50,44,1822
+239,Air France_239,Air France,200,14,239,100,4,457,50,44,2596
+240,Southwest Airlines_240,Southwest Airlines,200,163,209,100,37,224,50,39,1545
+241,Virgin America_241,Virgin America,200,29,117,100,89,393,50,1,1397
+242,American Airlines_242,American Airlines,200,194,228,100,86,239,50,8,1024
+243,Southwest Airlines_243,Southwest Airlines,200,119,292,100,42,586,50,32,1449
+244,American Airlines_244,American Airlines,200,126,154,100,63,363,50,40,2663
+245,Delta Airlines_245,Delta Airlines,200,194,242,100,68,539,50,1,2436
+246,Alaska Airlines_246,Alaska Airlines,200,167,190,100,5,362,50,9,2486
+247,United Airlines_247,United Airlines,200,13,145,100,30,239,50,7,1570
+248,Delta Airlines_248,Delta Airlines,200,200,174,100,100,575,50,50,1386
+249,JetBlue_249,JetBlue,200,79,148,100,49,274,50,26,1452
+250,Alaska Airlines_250,Alaska Airlines,200,32,101,100,88,387,50,20,2707
