@@ -48,23 +48,27 @@ const SearchForm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // if (departureValue == null) {
-    //   alert("Select Departure Airport");
-    //   return;
-    // }
-    // if (arrivalValue == null) {
-    //   alert("Select Arrival Airport");
-    //   return;
-    // }
-    // if (dateValue == null) {
-    //   alert("Select Departure Date");
-    //   return;
-    // }
-    // if (passengerCount > 7 || passengerCount < 1) {
-    //   alert("Select Passenger Count");
-    //   return;
-    // }
-    
+    if (departureValue == null) {
+      alert("Select Departure Airport");
+      return;
+    }
+    if (arrivalValue == null) {
+      alert("Select Arrival Airport");
+      return;
+    }
+    if (departureValue.code === arrivalValue.code) {
+      alert("Departure/Arrival Airport cannot be the same");
+      return;
+    }
+    if (dateValue == null) {
+      alert("Select Departure Date");
+      return;
+    }
+    if (passengerCount > 7 || passengerCount < 1) {
+      alert("Select Passenger Count");
+      return;
+    }
+
     props.searchHandler(
       parseInt(departureValue.code),
       parseInt(arrivalValue.code),
