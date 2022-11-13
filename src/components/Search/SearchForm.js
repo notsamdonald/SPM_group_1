@@ -70,8 +70,8 @@ const SearchForm = (props) => {
     }
 
     props.searchHandler(
-      parseInt(departureValue.code),
-      parseInt(arrivalValue.code),
+      departureValue,
+      arrivalValue,
       dateValue.format("YYYY-MM-DD"),
       passengerCount
     );

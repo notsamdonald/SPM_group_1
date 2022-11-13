@@ -27,9 +27,9 @@ const StartingPageContent = () => {
         method: "POST",
         body: JSON.stringify({
           // landAirportId: 10,
-          landAirportId: arrivalValue,
-          departAirportId: departureValue,
-          
+          landAirportId: arrivalValue.code,
+          departAirportId: departureValue.code,
+
           // departAirportId: 5,
           departDateTime: dateValue,
           // departDateTime: "2022-12-01",
@@ -65,6 +65,9 @@ const StartingPageContent = () => {
         // description: responseData[key].description,
         departDateTime: responseData[key].depart_date_time,
         price: responseData[key].aFare * passengerCount,
+        from: departureValue.label,
+        to: arrivalValue.label,
+        passengers: passengerCount,
         // price: responseData[key].company,
       });
     }
@@ -99,6 +102,14 @@ const StartingPageContent = () => {
     );
     setFlights(filteredFlights);
     console.log(flights);
+  };
+
+  const sortFlights = (isAscending) => {
+    if (isAscending) {
+      setFlights(flights.sort((a, b) => b.price - a.price));
+    } else {
+      setFlights(flights.sort((a, b) => a.price - b.price));
+    }
   };
 
   // const loadingDisplay = () => {};
