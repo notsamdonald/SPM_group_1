@@ -106,9 +106,7 @@ const StartingPageContent = () => {
 
   const airlineFilterHandler = (airline) => {
     console.log(airline);
-    const filteredFlights = flights.filter(
-        (flight) => flight.company = airline
-    );
+    const filteredFlights = flights.filter((flight) => flight.name === airline);
     setFlights(filteredFlights);
     console.log(flights);
   };
@@ -140,7 +138,10 @@ const StartingPageContent = () => {
               <p>{httpError}</p>
             </section>
           )}
-          <MainFilter maxPriceFilter={maxPriceFilterHandler} arilineFilter={airlineFilterHandler}></MainFilter>
+          <MainFilter
+            maxPriceFilter={maxPriceFilterHandler}
+            airlineFilter={airlineFilterHandler}
+          ></MainFilter>
           {flights.length !== 0 && (
             <div className={classes.FlightFilter}>
               <FlightList flights={flights}></FlightList>
