@@ -32,18 +32,25 @@ const columns = [
   },
   {
     field: "departDateTime",
-    headerName: "Departure Date",
+    headerName: "Departure Time",
     headerAlign: "center",
     align: "center",
     flex: 1,
   },
   {
-    field: "passengers",
-    headerName: "Passengers",
+    field: "duration",
+    headerName: "Duration",
     headerAlign: "center",
     align: "center",
     flex: 1,
   },
+  // {
+  //   field: "passengers",
+  //   headerName: "Passengers",
+  //   headerAlign: "center",
+  //   align: "center",
+  //   flex: 1,
+  // },
   {
     field: "price",
     headerName: "Total Price ($)",
