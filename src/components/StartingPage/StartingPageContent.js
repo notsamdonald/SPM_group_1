@@ -137,6 +137,13 @@ const StartingPageContent = () => {
     console.log(flights);
   };
 
+  const airlineFilterHandler = (airline) => {
+    console.log(airline);
+    const filteredFlights = flights.filter((flight) => flight.name === airline);
+    setFlights(filteredFlights);
+    console.log(flights);
+  };
+
   const sortFlights = (isAscending) => {
     if (isAscending) {
       setFlights(flights.sort((a, b) => b.price - a.price));
@@ -164,7 +171,10 @@ const StartingPageContent = () => {
               <p>{httpError}</p>
             </section>
           )}
-          <MainFilter maxPriceFilter={maxPriceFilterHandler}></MainFilter>
+          <MainFilter
+            maxPriceFilter={maxPriceFilterHandler}
+            airlineFilter={airlineFilterHandler}
+          ></MainFilter>
           {flights.length !== 0 && (
             <div className={classes.FlightFilter}>
               <FlightList flights={flights}></FlightList>
