@@ -29,6 +29,9 @@ function convertMsToHM(milliseconds) {
   return `${padTo2Digits(hours)} hours, ${padTo2Digits(minutes)} minutes`;
 }
 
+let searchedFlights = [];
+let filteredFlights = [];
+
 const StartingPageContent = () => {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.isLoggedIn;
@@ -106,7 +109,10 @@ const StartingPageContent = () => {
     }
 
     setFlights(loadedFlights);
-    console.log(loadedFlights);
+    // console.log(loadedFlights);
+    searchedFlights = loadedFlights;
+    filteredFlights = loadedFlights;
+    // console.log(searchedFlights);
     // setFlights(DUMMY_FLIGHTS);
     setIsLoading(false);
   };
@@ -130,7 +136,7 @@ const StartingPageContent = () => {
 
   const maxPriceFilterHandler = (maxPrice) => {
     console.log(maxPrice);
-    const filteredFlights = flights.filter(
+    filteredFlights = filteredFlights.filter(
       (flight) => flight.price <= maxPrice
     );
     setFlights(filteredFlights);
@@ -139,7 +145,9 @@ const StartingPageContent = () => {
 
   const airlineFilterHandler = (airline) => {
     console.log(airline);
-    const filteredFlights = flights.filter((flight) => flight.name === airline);
+    filteredFlights = filteredFlights.filter(
+      (flight) => flight.name === airline
+    );
     setFlights(filteredFlights);
     console.log(flights);
   };
@@ -150,6 +158,14 @@ const StartingPageContent = () => {
     } else {
       setFlights(flights.sort((a, b) => a.price - b.price));
     }
+  };
+
+  const clearFilterHandler = () => {
+    // console.log(flights);
+    // console.log(searchedFlights);
+    setFlights(searchedFlights);
+    filteredFlights = searchedFlights;
+    // console.log(flights);
   };
 
   // const loadingDisplay = () => {};
@@ -174,6 +190,7 @@ const StartingPageContent = () => {
           <MainFilter
             maxPriceFilter={maxPriceFilterHandler}
             airlineFilter={airlineFilterHandler}
+            clearFilter={clearFilterHandler}
           ></MainFilter>
           {flights.length !== 0 && (
             <div className={classes.FlightFilter}>

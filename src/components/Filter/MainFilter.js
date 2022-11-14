@@ -4,13 +4,18 @@ import { Fragment } from "react";
 import classes from "./MainFilter.module.css";
 import MaxPriceFilter from "./MaxpriceFilter";
 import AirlineFilter from "./AirlineFilter";
+import Button from "@mui/material/Button";
 
 const MainFilter = (props) => {
+  const clearFilterHandler = () => {
+    props.clearFilter();
+  };
+
   return (
     <Fragment>
       <p>Filter:</p>
       <MaxPriceFilter maxPriceFilter={props.maxPriceFilter}></MaxPriceFilter>
-      <AirlineFilter airlineFilter = {props.airlineFilter}></AirlineFilter>
+      <AirlineFilter airlineFilter={props.airlineFilter}></AirlineFilter>
       {/*<button className={classes.collapsible}>Filter 2</button>*/}
       {/*<div className={classes.content}>*/}
       {/*  <p>*/}
@@ -29,6 +34,14 @@ const MainFilter = (props) => {
           aliquip ex ea commodo consequat.
         </p>
       </div>
+      <Button
+        type="submit"
+        variant="contained"
+        color="success"
+        onClick={clearFilterHandler}
+      >
+        Clear Filter
+      </Button>
     </Fragment>
   );
 };
