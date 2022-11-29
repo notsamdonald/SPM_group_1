@@ -25,7 +25,7 @@ const MainFilter = (props) => {
       {/*    aliquip ex ea commodo consequat.*/}
       {/*  </p>*/}
       {/*</div>*/}
-      <button className={classes.collapsible}>Filter 3</button>
+      {/* <button className={classes.collapsible}>Filter 3</button> */}
       <div className={classes.content}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
